@@ -9,13 +9,23 @@ import { closeProject } from './requests/close-project.js';
 import { openProject } from './requests/open-project.js';
 import { transform } from './requests/transform.js';
 
+/** @type {Record<string, (params: any) => unknown>} */
 const handlers = { openProject, closeProject, transform };
 
-parentPort.on('message', ({ id, method, params }) => {
+if (!parentPort) {
+  throw new Error('worker.js must run as a worker thread');
+}
+const port = parentPort;
+
+port.on('message', ({ id, method, params }) => {
   try {
-    parentPort.postMessage({ id, result: handlers[method](params) ?? null });
+    const handler = handlers[method];
+    if (!handler) {
+      throw new Error(`Unknown worker method: ${method}`);
+    }
+    port.postMessage({ id, result: handler(params) ?? null });
   } catch (error) {
-    parentPort.postMessage({
+    port.postMessage({
       id,
       error: { message: error instanceof Error ? error.message : String(error) },
     });
