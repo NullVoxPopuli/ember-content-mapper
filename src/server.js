@@ -4,11 +4,15 @@ import {
   StreamMessageWriter,
 } from 'vscode-jsonrpc/node';
 
+import { availableParallelism } from 'node:os';
+
+import { Tinypool } from 'tinypool';
+
 import { closeProject } from './requests/close-project.js';
 import { initialize } from './requests/initialize.js';
 import { openProject } from './requests/open-project.js';
 import { transform } from './requests/transform.js';
-import { createPool, poolSize } from './util/pool.js';
+import { projects } from './util/projects.js';
 
 const connection = createMessageConnection(
   new StreamMessageReader(process.stdin),
@@ -16,27 +20,36 @@ const connection = createMessageConnection(
 );
 
 // TypeScript parses files on several threads and sends their `transform`
-// requests concurrently; a pool of workers answers them in parallel. The
-// main thread keeps its own project state for option diagnostics and for
-// the single-worker case.
-const size = poolSize();
-const pool = size > 1 ? createPool(size) : null;
+// requests concurrently; a pool of worker threads answers them in parallel.
+// `TS_CONTENT_MAPPER_WORKERS` sets the size (default: cores minus one, at
+// most 8); `1` transforms on the main thread.
+const fromEnv = Number.parseInt(process.env.TS_CONTENT_MAPPER_WORKERS ?? '', 10);
+const size =
+  Number.isInteger(fromEnv) && fromEnv >= 1
+    ? fromEnv
+    : Math.min(8, Math.max(1, availableParallelism() - 1));
+const pool =
+  size > 1
+    ? new Tinypool({
+        filename: new URL('./worker.js', import.meta.url).href,
+        minThreads: size,
+        maxThreads: size,
+      })
+    : null;
 
 connection.onRequest('initialize', initialize);
-connection.onRequest('openProject', async (params) => {
-  const result = openProject(params);
-  await pool?.broadcast('openProject', params);
-  return result;
+connection.onRequest('openProject', openProject);
+connection.onRequest('transform', (params) => {
+  const project = projects.get(params.projectHandle);
+  if (!pool || !project) {
+    return transform(params);
+  }
+  return pool.run({ project: project.params, params });
 });
-connection.onRequest('transform', (params) => (pool ? pool.transform(params) : transform(params)));
-connection.onRequest('closeProject', async (params) => {
-  closeProject(params);
-  await pool?.broadcast('closeProject', params);
-});
-
+connection.onRequest('closeProject', closeProject);
 // TypeScript closes the connection when it is done; the workers would
 // otherwise keep this process alive.
 connection.onClose(() => {
-  void pool?.terminate();
+  void pool?.destroy();
 });
 connection.listen();

@@ -1,33 +1,23 @@
-// A transform worker. TypeScript sends `transform` requests concurrently
-// (one per parser thread); `src/server.js` spreads them over a pool of
-// these workers. Each worker holds its own copy of the project state, so
-// `openProject` and `closeProject` are replayed to every worker.
+// A transform worker (tinypool). TypeScript sends `transform` requests
+// concurrently, one per parser thread; `src/server.js` runs them here.
+// Each task carries its project's `openProject` params, so a worker opens
+// a project on first use and needs no state replayed from the main thread.
 
-import { parentPort } from 'node:worker_threads';
-
-import { closeProject } from './requests/close-project.js';
 import { openProject } from './requests/open-project.js';
 import { transform } from './requests/transform.js';
+import { projects } from './util/projects.js';
 
-/** @type {Record<string, (params: any) => unknown>} */
-const handlers = { openProject, closeProject, transform };
+/**
+ * @import { OpenProjectParams, TransformParams, TransformResult } from './protocol.js'
+ */
 
-if (!parentPort) {
-  throw new Error('worker.js must run as a worker thread');
-}
-const port = parentPort;
-
-port.on('message', ({ id, method, params }) => {
-  try {
-    const handler = handlers[method];
-    if (!handler) {
-      throw new Error(`Unknown worker method: ${method}`);
-    }
-    port.postMessage({ id, result: handler(params) ?? null });
-  } catch (error) {
-    port.postMessage({
-      id,
-      error: { message: error instanceof Error ? error.message : String(error) },
-    });
+/**
+ * @param {{ project: OpenProjectParams, params: TransformParams }} task
+ * @returns {TransformResult}
+ */
+export default function run({ project, params }) {
+  if (!projects.has(params.projectHandle)) {
+    openProject(project);
   }
-});
+  return transform(params);
+}

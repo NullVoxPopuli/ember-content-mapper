@@ -168,8 +168,9 @@ request for a mapper debug mode
 `TS_CONTENT_MAPPER_DEBUG=1` logs the JSON-RPC traffic between `tsc` and the mapper.
 
 `TS_CONTENT_MAPPER_WORKERS=<n>` sets the number of transform workers. TypeScript parses on several
-threads and sends their `transform` requests concurrently; the mapper answers them from a pool of
-worker threads, one per core minus one by default (at most 8). `1` transforms on the main thread.
+threads and sends their `transform` requests concurrently; the mapper answers them from a
+[tinypool](https://github.com/tinylibs/tinypool) pool of worker threads, one per core minus one by
+default (at most 8). `1` transforms on the main thread.
 `tsc --extendedDiagnostics` reports the time spent waiting on the mapper as
 `Content mapper request wait time`.
 

@@ -8,7 +8,7 @@ import { rewriteModuleStandalone } from '@glint/ember-tsc/transform/standalone';
 
 import { openProject } from '../src/requests/open-project.js';
 import { transform } from '../src/requests/transform.js';
-import { createPool } from '../src/util/pool.js';
+import { Tinypool } from 'tinypool';
 import { projects } from '../src/util/projects.js';
 
 import { template } from './template.js';
@@ -68,16 +68,22 @@ async function drain(handle) {
   );
 }
 
+const open = {
+  projectHandle,
+  options: {},
+  configFilePath: `${process.cwd()}/tsconfig.json`,
+  rootDir: process.cwd(),
+};
 const pools = new Map();
 for (const size of [2, 4, 8]) {
-  const pool = createPool(size);
-  await pool.broadcast('openProject', {
-    projectHandle,
-    options: {},
-    configFilePath: `${process.cwd()}/tsconfig.json`,
-    rootDir: process.cwd(),
-  });
-  pools.set(size, pool);
+  pools.set(
+    size,
+    new Tinypool({
+      filename: new URL('../src/worker.js', import.meta.url).href,
+      minThreads: size,
+      maxThreads: size,
+    }),
+  );
 }
 
 summary(() => {
@@ -87,11 +93,12 @@ summary(() => {
     });
     for (const [size, pool] of pools) {
       bench(`pool of ${size} workers`, async () => {
-        await drain((params) => pool.transform(params));
+        await drain((params) => pool.run({ project: open, params }));
       });
     }
   });
 });
 
-await run();
-await Promise.all([...pools.values()].map((pool) => pool.terminate()));
+// MITATA_FORMAT=json for machine-readable output.
+await run({ format: process.env.MITATA_FORMAT ?? 'mitata' });
+await Promise.all([...pools.values()].map((pool) => pool.destroy()));

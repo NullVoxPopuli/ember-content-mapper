@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@glint/ember-tsc": "~1.11.0",
+    "tinypool": "2.1.2",
     "vscode-jsonrpc": "^9.0.0"
   },
   "devDependencies": {
