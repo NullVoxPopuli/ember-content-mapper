@@ -70,9 +70,9 @@ a limitation of `@glint/template`'s types:
 
 - `record-string-never-args.gts`: `Args: Record<string, never>` has an index signature, so
   `ComponentSignatureArgs` in `@glint/template/-private/signature.d.ts` takes the
-  `{ Named; Positional }` branch and both resolve to `never`. Direct invocation of a lowercase
-  identifier is an element, not a component, so only the block-param path shows it.
-  Workaround: `Args: { Named: Record<string, never>; Positional: [] }`.
+  `{ Named; Positional }` branch and both resolve to `never`. Both a direct `<Direct />` and a
+  block-param `<tab.component />` invocation report it.
+  Workaround: omit `Args`, or use `Args: { Named: Record<string, never>; Positional: [] }`.
 - `conditional-element-generic.gts`: an `Element` type that is a conditional over an
   unresolved type parameter does not resolve, so no attribute is assignable. Workaround: widen
   the value to a concrete type.
