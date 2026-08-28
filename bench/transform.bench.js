@@ -11,30 +11,7 @@ import { transform } from '../src/requests/transform.js';
 import { createPool } from '../src/util/pool.js';
 import { projects } from '../src/util/projects.js';
 
-/**
- * A component with `elements` nested divs, each carrying attribute
- * mustaches and a helper call — the shapes that drive Glint's mapping work.
- *
- * @param {number} elements
- * @returns {string}
- */
-function template(elements) {
-  const rows = Array.from(
-    { length: elements },
-    (_, i) =>
-      `    <div class={{if this.on${i} "a" "b"}} title={{concat "row " ${i}}}>{{this.label${i}}} <span>{{yield}}</span></div>`,
-  ).join('\n');
-  return `import Component from '@glimmer/component';
-import { concat } from '@ember/helper';
-
-export default class Bench extends Component {
-${Array.from({ length: elements }, (_, i) => `  on${i} = true;\n  label${i} = 'x';`).join('\n')}
-  <template>
-${rows}
-  </template>
-}
-`;
-}
+import { template } from './template.js';
 
 const sizes = { small: 10, medium: 100, large: 1000 };
 const fixtures = Object.fromEntries(

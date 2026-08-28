@@ -21,7 +21,8 @@
     "test:examples": "pnpm --filter './examples/*' lint:types && pnpm --filter nvp-library --filter ember-library-v2 build",
     "test:typecheck": "node --test test/typecheck.js test/modes.js test/lsp.js",
     "test:unit": "node --test test/fixtures.js test/initialize.js test/project.js test/server.js",
-    "bench:workers": "node bench/transform.bench.js"
+    "bench:workers": "node bench/transform.bench.js",
+    "bench:workers:tsc": "node bench/tsc.bench.js"
   },
   "dependencies": {
     "@glint/ember-tsc": "~1.11.0",
