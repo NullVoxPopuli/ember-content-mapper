@@ -181,6 +181,18 @@ export function buildMappings(transformedModule) {
       return;
     }
 
+    if (node.originalRange.start < 0 || node.originalRange.end < node.originalRange.start) {
+      // Glint occasionally emits nodes with invalid original ranges (e.g. a
+      // block-param identifier with `originalRange.start === -1` — an
+      // indexOf-miss in the transform's identifier location). Mapping such a
+      // node would synthesize an anchor outside the template span, which
+      // poisons demoteOverlappingOriginals into demoting the whole leading
+      // script mapping — every pre-template diagnostic then reports at (1,1).
+      // Treat the node as unmapped boilerplate instead: its generated text
+      // falls into the parent's gap mappings.
+      return;
+    }
+
     const virtualText = transformed.slice(virtualStart, virtualEnd);
     const originalText = span.originalFile.contents.slice(originalStart, originalEnd);
     const region = { originalStart, originalEnd, virtualStart, virtualEnd };
