@@ -26,9 +26,11 @@ export function poolSize() {
  * @returns {{
  *   broadcast(method: string, params: unknown): Promise<void>,
  *   transform(params: TransformParams): Promise<TransformResult>,
+ *   terminate(): Promise<void>,
  * }}
  *   A pool that replays project state to every worker and spreads
- *   transforms over the least busy one.
+ *   transforms over the least busy one. `terminate` stops the workers;
+ *   until then they keep the process alive.
  */
 export function createPool(size) {
   let nextId = 0;
@@ -47,8 +49,6 @@ export function createPool(size) {
       for (const request of pending.values()) request.reject(error);
       pending.clear();
     });
-    // The pool must not keep the mapper process alive once TypeScript closes stdin.
-    worker.unref();
     return { worker, pending };
   });
 
@@ -83,6 +83,9 @@ export function createPool(size) {
         candidate.pending.size < least.pending.size ? candidate : least,
       );
       return send(entry, 'transform', params);
+    },
+    async terminate() {
+      await Promise.all(workers.map((entry) => entry.worker.terminate()));
     },
   };
 }

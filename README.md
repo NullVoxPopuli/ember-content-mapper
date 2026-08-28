@@ -178,6 +178,8 @@ worker threads, one per core minus one by default (at most 8). `1` transforms on
 - [`examples/`](./examples): two Ember apps that use the mapper.
 - [`test/test-packages/`](./test/test-packages): copies of Glint's test packages, with the known
   differences recorded in [test/test-packages/README.md](./test/test-packages/README.md).
+- [`bench/`](./bench): `pnpm bench` — mitata benches of the transform per template size, the mapper's
+  overhead over Glint's rewrite, and the worker pool against the main thread.
 - [`test/`](./test): snapshot tests of the transform, tests of the server process, LSP tests
   against the example app (hover, definition, completion, diagnostics, rename), and compiler
   mode tests (declaration emit, `--build` up-to-date checks, option diagnostics).

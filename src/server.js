@@ -34,4 +34,9 @@ connection.onRequest('closeProject', async (params) => {
   await pool?.broadcast('closeProject', params);
 });
 
+// TypeScript closes the connection when it is done; the workers would
+// otherwise keep this process alive.
+connection.onClose(() => {
+  void pool?.terminate();
+});
 connection.listen();
