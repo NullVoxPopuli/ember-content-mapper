@@ -76,6 +76,9 @@ a limitation of `@glint/template`'s types:
 - `conditional-element-generic.gts`: an `Element` type that is a conditional over an
   unresolved type parameter does not resolve, so no attribute is assignable. Workaround: widen
   the value to a concrete type.
+- `empty-body-close-tag.gts`: `<NoBlocks></NoBlocks>` with nothing between the tags transforms
+  to a default block, `const [] = __glintY__.blockParams["default"]`, and the signature declares
+  no `Blocks`. `<NoBlocks />` transforms to no block. Workaround: self-close the element.
 - `curried-component-content.gts`: `{{component Comp a="hi"}}` in content position produces a
   curried `Invokable`, and `ContentValue` accepts only `ComponentReturn<{}, any>`. Ember renders
   it. Workaround: invoke the curried value, for example `{{#let (component Comp a="hi") as |C|}}<C />{{/let}}`.
