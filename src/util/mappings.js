@@ -182,14 +182,18 @@ export function buildMappings(transformedModule) {
     }
 
     if (node.originalRange.start < 0 || node.originalRange.end < node.originalRange.start) {
-      // Glint occasionally emits nodes with invalid original ranges (e.g. a
-      // block-param identifier with `originalRange.start === -1` — an
-      // indexOf-miss in the transform's identifier location). Mapping such a
-      // node would synthesize an anchor outside the template span, which
-      // poisons demoteOverlappingOriginals into demoting the whole leading
-      // script mapping — every pre-template diagnostic then reports at (1,1).
-      // Treat the node as unmapped boilerplate instead: its generated text
-      // falls into the parent's gap mappings.
+      // Under @glint/ember-tsc 1.11, a block whose body contains a nested
+      // block's `|params|` anchors its own params with an indexOf that can
+      // miss (fixed upstream in typed-ember/glint#1235). The fixture at
+      // test/fixtures/invalid-original-range emits, for `groupId`:
+      //
+      //   { originalRange: { start: -1, end: 6 }, ... }
+      //
+      // `span.originalStart + (-1)` would anchor that mapping just before the
+      // template span — inside the script's verbatim mapping — and
+      // demoteOverlappingOriginals would demote the script mapping to a
+      // zero-length anchor: every script diagnostic then reports at (1,1).
+      // Treat the node as unmapped boilerplate (parent gap mappings) instead.
       return;
     }
 
