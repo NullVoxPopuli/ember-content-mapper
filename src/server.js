@@ -23,10 +23,7 @@ const connection = createMessageConnection(
 // mapper decides how they execute: a pool of worker threads, or the main
 // thread when `TS_CONTENT_MAPPER_WORKERS=1` (microsoft/TypeScript#64075).
 const fromEnv = Number.parseInt(process.env.TS_CONTENT_MAPPER_WORKERS ?? '', 10);
-const size =
-  Number.isInteger(fromEnv) && fromEnv >= 1
-    ? fromEnv
-    : Math.min(8, Math.max(1, availableParallelism() - 1));
+const size = fromEnv >= 1 ? fromEnv : Math.min(8, Math.max(1, availableParallelism() - 1));
 const pool =
   size > 1
     ? new Tinypool({
