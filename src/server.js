@@ -19,10 +19,9 @@ const connection = createMessageConnection(
   new StreamMessageWriter(process.stdout),
 );
 
-// TypeScript parses files on several threads and sends their `transform`
-// requests concurrently; a pool of worker threads answers them in parallel.
-// `TS_CONTENT_MAPPER_WORKERS` sets the size (default: cores minus one, at
-// most 8); `1` transforms on the main thread.
+// TypeScript decides how many `transform` requests are in flight. The
+// mapper decides how they execute: a pool of worker threads, or the main
+// thread when `TS_CONTENT_MAPPER_WORKERS=1` (microsoft/TypeScript#64075).
 const fromEnv = Number.parseInt(process.env.TS_CONTENT_MAPPER_WORKERS ?? '', 10);
 const size =
   Number.isInteger(fromEnv) && fromEnv >= 1
@@ -47,8 +46,7 @@ connection.onRequest('transform', (params) => {
   return pool.run({ project: project.params, params });
 });
 connection.onRequest('closeProject', closeProject);
-// TypeScript closes the connection when it is done; the workers would
-// otherwise keep this process alive.
+// The workers keep the process alive until TypeScript closes the connection.
 connection.onClose(() => {
   void pool?.destroy();
 });
