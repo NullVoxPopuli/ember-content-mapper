@@ -175,8 +175,9 @@ request for a mapper debug mode
 - [`examples/`](./examples): two Ember apps that use the mapper.
 - [`test/test-packages/`](./test/test-packages): copies of Glint's test packages, with the known
   differences recorded in [test/test-packages/README.md](./test/test-packages/README.md).
-- [`bench/`](./bench): `pnpm bench` (mitata: transform cost, pool vs main thread) and `pnpm bench:tsc`
-  (`tsc --extendedDiagnostics` on a generated project).
+- [`bench/`](./bench): `pnpm bench:workers` (mitata: transform cost, pool vs main thread) and
+  `pnpm bench:workers:tsc` (`tsc --extendedDiagnostics` on a generated project); `pnpm bench` /
+  `pnpm bench:compare` are the mapper benchmarks in [`test/`](./test).
 - [`test/`](./test): snapshot tests of the transform, tests of the server process, LSP tests
   against the example app (hover, definition, completion, diagnostics, rename), and compiler
   mode tests (declaration emit, `--build` up-to-date checks, option diagnostics).
