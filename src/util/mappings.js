@@ -181,6 +181,22 @@ export function buildMappings(transformedModule) {
       return;
     }
 
+    if (node.originalRange.start < 0 || node.originalRange.end < node.originalRange.start) {
+      // Under @glint/ember-tsc 1.11, a block whose body contains a nested
+      // block's `|params|` anchors its own params with an indexOf that can
+      // miss (fixed upstream in typed-ember/glint#1235). The fixture at
+      // test/fixtures/invalid-original-range emits, for `groupId`:
+      //
+      //   { originalRange: { start: -1, end: 6 }, ... }
+      //
+      // `span.originalStart + (-1)` would anchor that mapping just before the
+      // template span — inside the script's verbatim mapping — and
+      // demoteOverlappingOriginals would demote the script mapping to a
+      // zero-length anchor: every script diagnostic then reports at (1,1).
+      // Treat the node as unmapped boilerplate (parent gap mappings) instead.
+      return;
+    }
+
     const virtualText = transformed.slice(virtualStart, virtualEnd);
     const originalText = span.originalFile.contents.slice(originalStart, originalEnd);
     const region = { originalStart, originalEnd, virtualStart, virtualEnd };
