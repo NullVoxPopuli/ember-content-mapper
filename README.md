@@ -129,6 +129,31 @@ directives keep working. See [Directives](#directives).
 
 Glint's language server is no longer in the loop. See [Editors](#editors) for what replaces it.
 
+## Known issues
+
+TypeScript 7 behavior changes that surface through the mapper. These are compiler behaviors, not
+mapper bugs; each links to the upstream report.
+
+- JSDoc `@extends` over expression heritage is dropped
+  ([TypeScript#64058](https://github.com/microsoft/TypeScript/issues/64058)). On TypeScript 6, a
+  classic `class Foo extends Component.extend(SomeMixin) {}` with a
+  `/** @extends {Component<FooSignature>} */` tag keeps its signature. TypeScript 7 rejects the
+  tag (`TS8023`/`TS8026`) and the signature is lost, so every invocation types the component as
+  taking no arguments, blocks, or element. Workaround: a sibling declaration file (see
+  [Declaration files](#declaration-files)).
+- Closure-style `function(...)` JSDoc types no longer parse, and the parse error silently drops
+  every later `@property` in the same typedef — arguments vanish from the signature with no error
+  at the definition. Rewrite them as arrow types: `{function(string)=}` becomes
+  `{((s: string) => void)=}`. Documented as intentional in
+  [typescript-go's CHANGES.md](https://github.com/microsoft/typescript-go/blob/main/CHANGES.md).
+- Declaration builds emit `foo.d.gts.ts` rather than `foo.d.ts`, which complicates
+  `package.json#exports` for published packages
+  ([TypeScript#64053](https://github.com/microsoft/TypeScript/issues/64053)).
+
+Tracked in [#23](https://github.com/NullVoxPopuli/ember-content-mapper/issues/23), along with a
+request for a mapper debug mode
+([TypeScript#64055](https://github.com/microsoft/TypeScript/issues/64055)).
+
 ## Editors
 
 - VS Code: TypeScript (Native Preview) plus Glint 2 1.4.0 or newer. Glint registers `.gts` and

@@ -1,0 +1,125 @@
+name: Benchmark Comparison
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    # Only paths that can change what the benchmarks measure.
+    paths:
+      - "src/**"
+      - "test/bench/**"
+      - "test/*.bench.mjs"
+      - "scripts/**"
+      - "patches/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/bench-compare.yml"
+  workflow_dispatch:
+    inputs:
+      experiment_ref:
+        description: "Experiment ref to benchmark (branch, tag, or commit SHA)"
+        required: true
+        type: string
+      base_ref:
+        description: "Control ref to compare against (branch, tag, or commit SHA)"
+        required: false
+        default: "main"
+        type: string
+
+concurrency:
+  group: bench-${{ github.head_ref || github.event.inputs.experiment_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bench-compare:
+    name: "Benchmark Comparison"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
+        id: checkout
+        with:
+          # Full history so the script can git-archive the base branch.
+          fetch-depth: 0
+          # For pull_request: use the PR head SHA so fork PRs resolve correctly
+          # (github.head_ref is a branch name that only exists on the fork remote).
+          # For workflow_dispatch: use the user-selected experiment ref.
+          ref: ${{ github.event.inputs.experiment_ref || github.event.pull_request.head.sha }}
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run benchmark comparison
+        env:
+          BENCH_JSON_OUTPUT: ${{ runner.temp }}/bench-results.json
+          BENCH_BASE_REF: ${{ github.event.inputs.base_ref }}
+        run: |
+          set -o pipefail
+          if [ -n "$BENCH_BASE_REF" ]; then
+            pnpm bench:compare --base "$BENCH_BASE_REF" | sed 's/\x1b\[[0-9;]*m//g' > "$RUNNER_TEMP/bench-output.txt"
+          else
+            pnpm bench:compare | sed 's/\x1b\[[0-9;]*m//g' > "$RUNNER_TEMP/bench-output.txt"
+          fi
+
+      - name: Format PR comment
+        if: always() && steps.checkout.outcome == 'success'
+        env:
+          BENCH_OUTPUT_FILE: ${{ runner.temp }}/bench-output.txt
+          BENCH_JSON_OUTPUT: ${{ runner.temp }}/bench-results.json
+          BENCH_JOB_SUCCESS: ${{ job.status == 'success' }}
+        run: node scripts/format-bench-comment.mjs > "$RUNNER_TEMP/bench-comment.md"
+
+      - name: Write job summary
+        if: always() && steps.checkout.outcome == 'success'
+        run: cat "$RUNNER_TEMP/bench-comment.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Post PR comment
+        if: always() && steps.checkout.outcome == 'success' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- bench-compare -->';
+
+            const body = fs.readFileSync(process.env.RUNNER_TEMP + '/bench-comment.md', 'utf8');
+
+            const headFullName = context.payload.pull_request?.head?.repo?.full_name;
+            const isFork = !headFullName || headFullName !== context.repo.owner + '/' + context.repo.repo;
+
+            if (isFork) {
+              core.info('PR is from a fork — skipping PR comment (results are in the job summary).');
+              core.info('--- Comment body start ---');
+              core.info(body);
+              core.info('--- Comment body end ---');
+            } else {
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+
+              const existing = comments.find(c => c.body.includes(marker));
+
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body,
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body,
+                });
+              }
+            }

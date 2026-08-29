@@ -1,0 +1,17 @@
+diff --git a/src/main.mjs b/src/main.mjs
+index d0b58faba93ef42daecd2b98c70eca3f1d0a47bc..92987bdf80c1c7758af541cbb27a41e8500681e2 100644
+--- a/src/main.mjs
++++ b/src/main.mjs
+@@ -117,6 +117,12 @@ export class B {
+       inner_gc: 'inner' === this._gc,
+       gc: !this._gc ? false : undefined,
+ 
++      // patched: lets the environment raise the sampling floors; an unset or
++      // invalid value stays undefined, and defaults() applies k_min_samples
++      // (12) and k_min_cpu_time (642ms) as before
++      min_samples: Number(process.env.MITATA_MIN_SAMPLES) || undefined,
++      min_cpu_time: 1e6 * Number(process.env.MITATA_MIN_CPU_TIME_MS) || undefined,
++
+       heap: await (async () => {
+         if (globalThis.Bun) {
+           const { memoryUsage } = await import('bun:jsc');
