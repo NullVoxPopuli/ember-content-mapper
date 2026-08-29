@@ -167,20 +167,16 @@ request for a mapper debug mode
 
 `TS_CONTENT_MAPPER_DEBUG=1` logs the JSON-RPC traffic between `tsc` and the mapper.
 
-`TS_CONTENT_MAPPER_WORKERS=<n>` sets the number of transform workers (default: one per core minus
-one, at most 8). TypeScript sends `transform` requests in parallel; the mapper answers them from a
-[tinypool](https://github.com/tinylibs/tinypool) pool of worker threads. `1` transforms on the main
-thread. `tsc --extendedDiagnostics` reports the wait as `Content mapper request wait time`.
+`TS_CONTENT_MAPPER_WORKERS=<n>` sets the number of transform workers (default: cores − 1, at most 8;
+`1` = main thread). `tsc --extendedDiagnostics` shows the wait as `Content mapper request wait time`.
 
 ## Repository
 
 - [`examples/`](./examples): two Ember apps that use the mapper.
 - [`test/test-packages/`](./test/test-packages): copies of Glint's test packages, with the known
   differences recorded in [test/test-packages/README.md](./test/test-packages/README.md).
-- [`bench/`](./bench): `pnpm bench` — mitata benches of the transform per template size, the mapper's
-  overhead over Glint's rewrite, and the worker pool against the main thread. `pnpm bench:tsc` runs
-  `tsc --extendedDiagnostics` over a generated template-dense project and reports the mapper wait
-  time, main thread vs pool.
+- [`bench/`](./bench): `pnpm bench` (mitata: transform cost, pool vs main thread) and `pnpm bench:tsc`
+  (`tsc --extendedDiagnostics` on a generated project).
 - [`test/`](./test): snapshot tests of the transform, tests of the server process, LSP tests
   against the example app (hover, definition, completion, diagnostics, rename), and compiler
   mode tests (declaration emit, `--build` up-to-date checks, option diagnostics).
