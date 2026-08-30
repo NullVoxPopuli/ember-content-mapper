@@ -1,6 +1,6 @@
 {
   "name": "ember-content-mapper",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A TypeScript content mapper for Ember's .gts and .gjs files",
   "repository": "NullVoxPopuli/ember-content-mapper",
   "license": "MIT",
