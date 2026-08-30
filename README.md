@@ -97,8 +97,8 @@ load tsserver plugins. The `contentMappers` entry replaces it.
 
 `"ember-source/types"` and `"@glint/ember-tsc/types"` in `compilerOptions.types` become
 redundant: the mapper references both from the transformed text. Removing them is optional.
-Keep them while `ember-tsc` or another tool that builds a program from the same `tsconfig.json`
-(for example `html-validate-ember`) still runs against the project; without them those tools
+Keep them while another tool that builds a program from the same `tsconfig.json`
+(for example `eslint`) still runs against the project; without them those tools
 lose the `@ember/*` and Glint types. Keep every other entry, for example
 `"@embroider/core/virtual"` or `"vite/client"`.
 
