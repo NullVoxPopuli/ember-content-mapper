@@ -1,14 +1,22 @@
 {
   "solution": {
     "ember-content-mapper": {
-      "impact": "patch",
-      "oldVersion": "0.2.0",
-      "newVersion": "0.2.1",
+      "impact": "minor",
+      "oldVersion": "0.2.1",
+      "newVersion": "0.3.0",
       "tagName": "latest",
       "constraints": [
         {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :memo: Documentation"
         },
         {
           "impact": "patch",
@@ -18,5 +26,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-08-27)\n\n* ember-content-mapper 0.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-content-mapper`\n  * [#24](https://github.com/NullVoxPopuli/ember-content-mapper/pull/24) Report empty-area expect-error directives, document Node 22 and upstream differences ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#22](https://github.com/NullVoxPopuli/ember-content-mapper/pull/22) Honor sibling declaration files (x.d.gjs.ts / x.gjs.d.ts) instead of transforming the module ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `ember-content-mapper`\n  * [#25](https://github.com/NullVoxPopuli/ember-content-mapper/pull/25) Make libraries private ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#21](https://github.com/NullVoxPopuli/ember-content-mapper/pull/21) Move lib to src ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#20](https://github.com/NullVoxPopuli/ember-content-mapper/pull/20) Consolidate test folders ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#18](https://github.com/NullVoxPopuli/ember-content-mapper/pull/18) library examples ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2026-08-30)\n\n* ember-content-mapper 0.3.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-content-mapper`\n  * [#32](https://github.com/NullVoxPopuli/ember-content-mapper/pull/32) Perf: Transform worker pool ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `ember-content-mapper`\n  * [#33](https://github.com/NullVoxPopuli/ember-content-mapper/pull/33) Skip mapping-tree nodes with invalid original ranges ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :memo: Documentation\n* `ember-content-mapper`\n  * [#34](https://github.com/NullVoxPopuli/ember-content-mapper/pull/34) Document known upstream TypeScript 7 issues in the README ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `ember-content-mapper`\n  * [#32](https://github.com/NullVoxPopuli/ember-content-mapper/pull/32) Perf: Transform worker pool ([@johanrd](https://github.com/johanrd))\n  * [#35](https://github.com/NullVoxPopuli/ember-content-mapper/pull/35) Add mitata benchmarks with PR comparison comments ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#26](https://github.com/NullVoxPopuli/ember-content-mapper/pull/26) Shrink examples ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 3\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }

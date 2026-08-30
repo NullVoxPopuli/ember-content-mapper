@@ -1,5 +1,32 @@
 # Changelog
 
+## Release (2026-08-30)
+
+* ember-content-mapper 0.3.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-content-mapper`
+  * [#32](https://github.com/NullVoxPopuli/ember-content-mapper/pull/32) Perf: Transform worker pool ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `ember-content-mapper`
+  * [#33](https://github.com/NullVoxPopuli/ember-content-mapper/pull/33) Skip mapping-tree nodes with invalid original ranges ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* `ember-content-mapper`
+  * [#34](https://github.com/NullVoxPopuli/ember-content-mapper/pull/34) Document known upstream TypeScript 7 issues in the README ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `ember-content-mapper`
+  * [#32](https://github.com/NullVoxPopuli/ember-content-mapper/pull/32) Perf: Transform worker pool ([@johanrd](https://github.com/johanrd))
+  * [#35](https://github.com/NullVoxPopuli/ember-content-mapper/pull/35) Add mitata benchmarks with PR comparison comments ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#26](https://github.com/NullVoxPopuli/ember-content-mapper/pull/26) Shrink examples ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-08-27)
 
 * ember-content-mapper 0.2.1 (patch)
