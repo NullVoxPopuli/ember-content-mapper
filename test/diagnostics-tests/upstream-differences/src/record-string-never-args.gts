@@ -6,3 +6,7 @@ interface Tab {
 declare const tabs: readonly Tab[];
 
 export const Looped = <template>{{#each tabs as |tab|}}<tab.component />{{/each}}</template>;
+
+declare const Direct: ComponentLike<{ Args: Record<string, never> }>;
+
+export const Invoked = <template><Direct /></template>;

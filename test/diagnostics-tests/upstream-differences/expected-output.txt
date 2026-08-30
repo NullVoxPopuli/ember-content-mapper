@@ -4,3 +4,4 @@ diagnostics-tests/upstream-differences/src/empty-body-close-tag.gts(7,43): error
   Property 'default' does not exist on type 'Required<FlattenBlockParams<{}>>'.
 diagnostics-tests/upstream-differences/src/jsdoc-extends-expression-heritage.gts(3,28): error TS2554: Expected 0 arguments, but got 1.
 diagnostics-tests/upstream-differences/src/record-string-never-args.gts(8,57): error TS2345: Argument of type '[]' is not assignable to parameter of type 'never'.
+diagnostics-tests/upstream-differences/src/record-string-never-args.gts(12,35): error TS2345: Argument of type '[]' is not assignable to parameter of type 'never'.
