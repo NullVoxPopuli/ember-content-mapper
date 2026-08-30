@@ -167,6 +167,9 @@ request for a mapper debug mode
 
 `TS_CONTENT_MAPPER_DEBUG=1` logs the JSON-RPC traffic between `tsc` and the mapper.
 
+`TS_CONTENT_MAPPER_WORKERS=<n>` sets the number of transform workers (default: cores − 1, at most 8;
+`1` = main thread). `tsc --extendedDiagnostics` shows the wait as `Content mapper request wait time`.
+
 ## Repository
 
 - [`examples/`](./examples): two Ember apps that use the mapper.
