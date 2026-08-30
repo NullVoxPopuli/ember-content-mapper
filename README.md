@@ -124,6 +124,10 @@ Add the extension to relative imports of `.gts` and `.gjs` modules:
 TypeScript resolves a content-mapped file only when the specifier has the extension. Glint
 resolved it either way, so this is usually the only source change the migration needs.
 
+A project that is clean under `ember-tsc` can report a few diagnostics that Glint dropped
+because they landed on unmapped generated text. See
+[Diagnostics that Glint drops](./test/test-packages/README.md#diagnostics-that-glint-drops).
+
 Glint's `{{! @glint-expect-error }}`, `{{! @glint-ignore }}`, and `{{! @glint-nocheck }}`
 directives keep working. See [Directives](#directives).
 
