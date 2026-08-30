@@ -2,6 +2,22 @@
 
 ## Release (2026-08-30)
 
+* ember-content-mapper 0.3.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-content-mapper`
+  * [#36](https://github.com/NullVoxPopuli/ember-content-mapper/pull/36) Record that `Args: Record<string, never>` also fails on a direct invocation ([@johanrd](https://github.com/johanrd))
+  * [#31](https://github.com/NullVoxPopuli/ember-content-mapper/pull/31) Record the empty-body close tag as a diagnostic Glint drops ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* `ember-content-mapper`
+  * [#30](https://github.com/NullVoxPopuli/ember-content-mapper/pull/30) Refine readme to optionally keep the tsconfig types entries while ember-tsc coexists ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+
+## Release (2026-08-30)
+
 * ember-content-mapper 0.3.0 (minor)
 
 #### :rocket: Enhancement
