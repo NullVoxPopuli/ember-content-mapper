@@ -162,8 +162,8 @@ request for a mapper debug mode
 
 ## Editors
 
-- VS Code: TypeScript (Native Preview) plus Glint 2 1.4.0 or newer. Glint registers `.gts` and
-  `.gjs` with TypeScript and stands down its own language server.
+- VS Code: TypeScript (Native Preview), TypeScript Nightly, and Glint 2 1.4.2 or newer, with
+  `"js/ts.experimental.useTsgo": true`.
 - Neovim: [ember.nvim](https://github.com/NullVoxPopuli/ember.nvim) attaches TypeScript 7's LSP
   when `tsconfig.json` has `contentMappers`.
 
