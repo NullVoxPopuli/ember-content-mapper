@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "TypeScriptTeam.native-preview",
+    "TypeScriptTeam.vscode-typescript-nightly",
+    "typed-ember.glint2-vscode",
+    "lifeart.vscode-glimmer-syntax"
+  ],
+  "unwantedRecommendations": ["typed-ember.glint-vscode"]
+}
