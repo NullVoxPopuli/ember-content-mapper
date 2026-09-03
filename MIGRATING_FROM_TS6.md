@@ -2,7 +2,9 @@
 
 On TypeScript 6, Glint 2 type-checks `.gts` and `.gjs` with its own compiler, `ember-tsc`, and
 serves editors from its own language server. TypeScript 7 does both itself and calls this mapper
-for the transform. Most of the migration is deleting configuration.
+for the transform. 
+
+Most of the migration is deleting configuration.
 
 Coming from Glint 1 instead? See [MIGRATING_FROM_GLINT1.md](./MIGRATING_FROM_GLINT1.md).
 
@@ -24,10 +26,18 @@ pnpm add -D ember-content-mapper typescript-7@npm:typescript@next
 
 TypeScript 7 does not ship the JS API that `typescript-eslint`, `tsdown`, and other build tools
 load from the `typescript` package. Those tools keep resolving `typescript` and get 6.x. Only the
-type-check runs on 7.
+type-check (and bins) use 7.
 
-`node_modules/.bin/tsc` points at one of the two packages, and which one depends on the package
-manager. Call the alias by path instead:
+under `pnpm`, `tsc` points at the higher `typescript` version, but the `lint:types` script needs updated:
+
+```jsonc
+// package.json
+"scripts": {
+  "lint:types": "tsc --noEmit --runExternalCode",
+}
+```
+
+<details><summary>for package managers that behave differently</summary>
 
 ```jsonc
 // package.json
@@ -36,17 +46,15 @@ manager. Call the alias by path instead:
 }
 ```
 
+</details>
+
 Without `--runExternalCode`, TypeScript reports `TS100024: Content mappers require the
 '--runExternalCode' command line flag to be enabled.`
 
-A project with no tool on the classic JS API can replace `typescript` with the nightly and use
-`tsc` from `.bin`. [`examples/`](./examples) has both layouts.
-
 ## Dependencies
 
-- Keep `@glint/ember-tsc` and `@glint/template`. The mapper transforms with `@glint/ember-tsc`
-  and references its types. `@glint/template` types the signatures you write by hand.
-- Remove `@glint/tsserver-plugin`. TypeScript 7 does not load tsserver plugins.
+- Keep `@glint/ember-tsc` and `@glint/template`. 
+- Remove `@glint/tsserver-plugin`. 
 
 ## tsconfig.json
 
@@ -72,10 +80,7 @@ A project with no tool on the classic JS API can replace `typescript` with the n
 
 Keep `"ember-source/types"` and `"@glint/ember-tsc/types"` in `compilerOptions.types`. The mapper
 does not need them, but ESLint's type-aware rules build their own program on TypeScript 6 and never
-see the mapper. Without the entries that program loses the `@ember/*` and Glint types.
-
-A project with a Glint 1 `glint` key still in `tsconfig.json` moves its `environment` options to the
-mapper's `options`. See [Options](./README.md#options).
+see the mapper. Without the entries that program loses the `@ember/*` types.
 
 ## Source
 
@@ -88,13 +93,6 @@ Add the extension to relative imports of `.gts` and `.gjs` modules:
 
 TypeScript resolves a content-mapped file only when the specifier has the extension. Glint resolved
 it either way, so this is usually the only source change.
-
-A project that is clean under `ember-tsc` can report a few diagnostics that Glint dropped because
-they landed on unmapped generated text. See
-[Diagnostics that Glint drops](./test/test-packages/README.md#diagnostics-that-glint-drops).
-
-The `{{! @glint-expect-error }}`, `{{! @glint-ignore }}`, and `{{! @glint-nocheck }}` directives
-keep working. See [Directives](./README.md#directives).
 
 ## TypeScript 7 behavior changes
 
