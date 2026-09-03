@@ -66,25 +66,19 @@ directory with the settings and extension recommendations below.
 1. Install [TypeScript (Native Preview)](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.native-preview)
    and [TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.vscode-typescript-nightly).
    Native Preview is the TypeScript 7 client. It runs the nightly build that TypeScript Nightly
-   installs, unless `js/ts.tsdk.path` points somewhere else.
+   installs.
 2. Install [Glint 2](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint2-vscode)
    1.4.0 or newer. On TypeScript 7 workspaces it registers `.gts` and `.gjs` with TypeScript and
    does not start its own language server. The "Glint2 Language Server" output channel logs this.
    Uninstall Glint 1 (`typed-ember.glint-vscode`).
 3. Install [Glimmer Syntax](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax)
    for highlighting. Glint 2 registers the languages and ships no grammar.
-4. Trust the workspace and accept the prompt to use the workspace TypeScript. The examples set:
+4. Set `"js/ts.experimental.useTsgo": true` and trust the workspace.
 
-   ```json
-   {
-     "js/ts.experimental.useTsgo": true,
-     "js/ts.tsdk.path": "./node_modules/typescript"
-   }
-   ```
-
-`js/ts.tsdk.path` makes the editor run the same TypeScript as `lint:types`. When `typescript` stays
-on 6.x for other tooling and the nightly is an alias, point it at the alias. `nvp-library` uses
-`./node_modules/typescript-7`.
+When `typescript` stays on 6.x for other tooling and the nightly is an alias, also set
+`js/ts.tsdk.path` to the alias and accept the prompt to use the workspace TypeScript. `nvp-library`
+sets it to `./node_modules/typescript-7`. A project with one `typescript` dependency does not need
+it.
 
 VS Code moved the `typescript.*` settings to `js/ts.*` and deprecated the old names.
 `typescript.experimental.useTsgo` and `typescript.tsdk` still work, but VS Code flags them in
