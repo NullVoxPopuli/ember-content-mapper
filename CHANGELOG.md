@@ -1,5 +1,17 @@
 # Changelog
 
+## Release (2026-09-03)
+
+* ember-content-mapper 0.3.2 (patch)
+
+#### :memo: Documentation
+* `ember-content-mapper`
+  * [#40](https://github.com/NullVoxPopuli/ember-content-mapper/pull/40) docs: split migration guides out of the README ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#38](https://github.com/NullVoxPopuli/ember-content-mapper/pull/38) docs: VS Code setup with marketplace extensions and js/ts.* settings ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-08-30)
 
 * ember-content-mapper 0.3.1 (patch)
