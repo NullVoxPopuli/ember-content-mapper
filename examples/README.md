@@ -63,17 +63,13 @@ the template. `TS_CONTENT_MAPPER_DEBUG=1` logs the JSON-RPC traffic.
 Open an example directory, for example `code examples/nvp-app`. Each example has a `.vscode/`
 directory with the settings and extension recommendations below.
 
-1. Install [TypeScript (Native Preview)](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.native-preview)
-   and [TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.vscode-typescript-nightly).
-   Native Preview is the TypeScript 7 client. It runs the nightly build that TypeScript Nightly
-   installs.
-2. Install [Glint 2](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint2-vscode)
-   1.4.0 or newer. On TypeScript 7 workspaces it registers `.gts` and `.gjs` with TypeScript and
-   does not start its own language server. The "Glint2 Language Server" output channel logs this.
-   Uninstall Glint 1 (`typed-ember.glint-vscode`).
-3. Install [Glimmer Syntax](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax)
-   for highlighting. Glint 2 registers the languages and ships no grammar.
-4. Set `"js/ts.experimental.useTsgo": true` and trust the workspace.
+1. Install these extensions:
+   - [TypeScript (Native Preview)](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.native-preview)
+   - [TypeScript Nightly](https://marketplace.visualstudio.com/items?itemName=TypeScriptTeam.vscode-typescript-nightly)
+   - [Glint 2](https://marketplace.visualstudio.com/items?itemName=typed-ember.glint2-vscode) 1.4.2 or newer
+   - [Glimmer Syntax](https://marketplace.visualstudio.com/items?itemName=lifeart.vscode-glimmer-syntax)
+2. Uninstall Glint 1 (`typed-ember.glint-vscode`).
+3. Set `"js/ts.experimental.useTsgo": true` and trust the workspace.
 
 When `typescript` stays on 6.x for other tooling and the nightly is an alias, also set
 `js/ts.tsdk.path` to the alias and accept the prompt to use the workspace TypeScript. `nvp-library`
