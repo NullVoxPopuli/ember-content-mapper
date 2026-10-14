@@ -17,7 +17,7 @@
     "ember-content-mapper": "workspace:*",
     "ember-modifier": "^4.0.0",
     "ember-source": "^6.2.0",
-    "typescript": "7.1.0-dev.20260821.1"
+    "typescript": "7.1.0-dev.20261014.1"
   },
   "volta": {
     "extends": "../../../package.json"

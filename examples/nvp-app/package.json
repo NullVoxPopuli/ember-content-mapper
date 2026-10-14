@@ -58,7 +58,7 @@
     "qunit-dom": "3.5.0",
     "qunit-theme-ember": "1.0.0",
     "testem": "3.17.0",
-    "typescript": "7.1.0-dev.20260821.1",
+    "typescript": "7.1.0-dev.20261014.1",
     "vite": "8.2.2"
   },
   "engines": {

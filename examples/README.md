@@ -30,12 +30,11 @@ signature and blocks (`counter.gts`), a template-only component (`greeting.gts`)
 functions, and an `index.ts` that imports the `.gts` modules.
 
 - `ember-library-v2`: from the Embroider v2 addon blueprint. Rollup compiles `src/` to `dist/`
-  and `tsc --runExternalCode` emits `declarations/` through the mapper. A `.gts` module emits
-  `counter.d.gts.ts`, and the `.gts`/`.gjs` specifiers in the other declaration files stay as
-  written; TypeScript 7 consumers resolve them through the same mapper. `addon.declarations()`
-  is not used: it strips `.gts` extensions from the emitted declarations (an `ember-tsc`-era
-  workaround), which would break that resolution. Also has a `.gjs` component (`avatar.gjs`) and
-  a filled-in `template-registry.ts`.
+  and `tsc --runExternalCode` emits `declarations/` through the mapper. With `outputExtensions`,
+  `counter.gts` emits `counter.d.ts`, and `.gts`/`.gjs` specifiers in the declarations are
+  rewritten to `.js`, so `declarations/` has the same layout as `dist/`. `addon.declarations()`
+  is not used: it is an `ember-tsc`-era workaround that strips `.gts` extensions. Also has a `.gjs` component (`avatar.gjs`) and a filled-in
+  `template-registry.ts`.
 - `nvp-library`: from the `ember.nvp` library blueprint, built with tsdown and
   `@nullvoxpopuli/ember-rolldown`, which bundle `dist/index.js` and emit a bundled
   `dist/index.d.ts` via isolated declarations. The build tooling needs classic TypeScript's JS
