@@ -22,12 +22,21 @@
       This way, we can have simpler `package.json#exports` that matches
       imports to files on disk
     */
-    "rootDir": "./src"
+    "rootDir": "./src",
+
+    /**
+      Required by `outputExtensions` below: imports of `./counter.gts` are
+      emitted as `./counter.js`, the file rollup writes.
+    */
+    "rewriteRelativeImportExtensions": true
   },
   "contentMappers": [
     {
       "package": "ember-content-mapper",
-      "extensions": [".gts", ".gjs"]
+      "extensions": [".gts", ".gjs"],
+      // rollup compiles .gts and .gjs to .js, so counter.gts emits
+      // counter.d.ts (not counter.d.gts.ts) next to dist/counter.js.
+      "outputExtensions": { ".gts": ".js", ".gjs": ".js" }
     }
   ]
 }
