@@ -7,6 +7,7 @@
     "examples/",
     "test/test-packages/",
     "test/diagnostics-tests/declaration/expected/",
+    "test/diagnostics-tests/declaration-output-extensions/expected/",
     "**/*.md",
     "**/*.yml",
     "**/*.yaml"

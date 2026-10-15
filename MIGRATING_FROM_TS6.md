@@ -103,9 +103,9 @@ upstream report.
   ([TypeScript#64058](https://github.com/microsoft/TypeScript/issues/64058)). On TypeScript 6, a
   classic `class Foo extends Component.extend(SomeMixin) {}` with a
   `/** @extends {Component<FooSignature>} */` tag keeps its signature. TypeScript 7 rejects the tag
-  (`TS8023`/`TS8026`) and the signature is lost, so every invocation types the component as taking
-  no arguments, blocks, or element. Workaround: a sibling declaration file (see
-  [Declaration files](./README.md#declaration-files)).
+  with `TS8023`/`TS8026`, or with `TS2508` since `7.1.0-dev.20261015.1`. The signature is lost,
+  so every invocation types the component as taking no arguments, blocks, or element. Workaround:
+  a sibling declaration file (see [Declaration files](./README.md#declaration-files)).
 - Closure-style `function(...)` JSDoc types no longer parse, and the parse error silently drops
   every later `@property` in the same typedef. Arguments vanish from the signature with no error at
   the definition. Rewrite them as arrow types: `{function(string)=}` becomes
@@ -113,7 +113,9 @@ upstream report.
   [typescript-go's CHANGES.md](https://github.com/microsoft/typescript-go/blob/main/CHANGES.md).
 - Declaration builds emit `foo.d.gts.ts` rather than `foo.d.ts`, which complicates
   `package.json#exports` for published packages
-  ([TypeScript#64053](https://github.com/microsoft/TypeScript/issues/64053)).
+  ([TypeScript#64053](https://github.com/microsoft/TypeScript/issues/64053)). Fixed in
+  `7.1.0-dev.20261014.1` with the `outputExtensions` option: see
+  [Publishing a library](./README.md#publishing-a-library).
 
 Tracked in [#23](https://github.com/NullVoxPopuli/ember-content-mapper/issues/23), along with a
 request for a mapper debug mode
