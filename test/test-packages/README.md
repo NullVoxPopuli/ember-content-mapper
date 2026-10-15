@@ -91,7 +91,7 @@ tag. Since `7.1.0-dev.20261015.1`
 ([TypeScript#64072](https://github.com/microsoft/TypeScript/pull/64072)), TypeScript 7 applies
 the tag's type arguments to the call's return type. `Component.extend(Evented)` returns a
 constructor that is not generic, so `classic-mixin.gjs` reports `TS2508: No base constructor has
-the specified number of type arguments`, the component still has no signature, and its
+the specified number of type arguments`. The component still has no signature, and its
 invocation reports `TS2769`. This reproduces in plain JavaScript with no Glint involved, so it
 is a typescript-go difference.
 

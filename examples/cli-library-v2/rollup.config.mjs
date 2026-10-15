@@ -55,11 +55,9 @@ export default {
     addon.gjs(),
 
     // Declarations are emitted by TypeScript 7 + the content mapper in the
-    // build script (`tsc --runExternalCode`), not by addon.declarations()
-    // (an ember-tsc-era workaround that strips .gts extensions, see
-    // https://github.com/typed-ember/glint/issues/628). `outputExtensions` in
-    // tsconfig.json makes them match this output: counter.gts -> counter.js
-    // and counter.d.ts.
+    // build script (`tsc --runExternalCode`), not by addon.declarations(),
+    // which strips .gts extensions from import specifiers
+    // (https://github.com/typed-ember/glint/issues/628).
 
     // addons are allowed to contain imports of .css files, which we want rollup
     // to leave alone and keep in the published output.
