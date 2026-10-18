@@ -31,10 +31,10 @@ function validateOptions(options) {
   const diagnostics = [];
 
   for (const key of Object.keys(options)) {
-    if (key !== 'additionalGlobals' && key !== 'additionalSpecialForms') {
+    if (key !== 'additionalGlobals' && key !== 'additionalSpecialForms' && key !== 'formControls') {
       diagnostics.push({
         path: [key],
-        messageText: `Unknown option '${key}'. Supported options are 'additionalGlobals' and 'additionalSpecialForms'.`,
+        messageText: `Unknown option '${key}'. Supported options are 'additionalGlobals', 'additionalSpecialForms' and 'formControls'.`,
       });
     }
   }
@@ -68,6 +68,14 @@ function validateOptions(options) {
     diagnostics.push({
       path: ['additionalSpecialForms'],
       messageText: `'additionalSpecialForms' must be an object.`,
+    });
+  }
+
+  const formControls = options['formControls'];
+  if (formControls !== undefined && typeof formControls !== 'boolean') {
+    diagnostics.push({
+      path: ['formControls'],
+      messageText: `'formControls' must be a boolean.`,
     });
   }
 

@@ -38,6 +38,7 @@ test('invalid options produce option diagnostics', () => {
     options: {
       additionalGlobals: ['t', 42],
       additionalSpecialForms: 'nope',
+      formControls: 'yes',
       typo: true,
     },
   });
@@ -46,7 +47,7 @@ test('invalid options produce option diagnostics', () => {
     {
       path: ['typo'],
       messageText:
-        "Unknown option 'typo'. Supported options are 'additionalGlobals' and 'additionalSpecialForms'.",
+        "Unknown option 'typo'. Supported options are 'additionalGlobals', 'additionalSpecialForms' and 'formControls'.",
     },
     {
       path: ['additionalGlobals', 1],
@@ -55,6 +56,10 @@ test('invalid options produce option diagnostics', () => {
     {
       path: ['additionalSpecialForms'],
       messageText: "'additionalSpecialForms' must be an object.",
+    },
+    {
+      path: ['formControls'],
+      messageText: "'formControls' must be a boolean.",
     },
   ]);
 

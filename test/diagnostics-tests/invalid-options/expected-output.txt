@@ -1,2 +1,2 @@
 diagnostics-tests/invalid-options/tsconfig.json(12,30): error glint0: 'additionalGlobals' must be an array of strings.
-diagnostics-tests/invalid-options/tsconfig.json(13,17): error glint0: Unknown option 'typo'. Supported options are 'additionalGlobals' and 'additionalSpecialForms'.
+diagnostics-tests/invalid-options/tsconfig.json(13,17): error glint0: Unknown option 'typo'. Supported options are 'additionalGlobals', 'additionalSpecialForms' and 'formControls'.

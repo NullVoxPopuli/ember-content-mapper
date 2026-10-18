@@ -51,6 +51,7 @@ tsc --noEmit --runExternalCode
       "options": {
         "additionalGlobals": ["t"],
         "additionalSpecialForms": {},
+        "formControls": true,
       },
     },
   ],
