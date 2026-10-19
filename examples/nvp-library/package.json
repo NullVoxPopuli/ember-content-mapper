@@ -41,7 +41,7 @@
     "ember-source": "7.2.0",
     "tsdown": "0.22.14",
     "typescript": "6.0.3",
-    "typescript-7": "npm:typescript@7.1.0-dev.20260821.1",
+    "typescript-7": "npm:typescript@7.1.0-dev.20261015.1",
     "@glint/ember-tsc": "1.11.0",
     "@glint/template": "1.8.0"
   },
