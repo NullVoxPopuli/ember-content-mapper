@@ -2,8 +2,8 @@
   "solution": {
     "ember-content-mapper": {
       "impact": "patch",
-      "oldVersion": "0.3.0",
-      "newVersion": "0.3.1",
+      "oldVersion": "0.3.1",
+      "newVersion": "0.3.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -18,5 +18,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-08-30)\n\n* ember-content-mapper 0.3.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-content-mapper`\n  * [#36](https://github.com/NullVoxPopuli/ember-content-mapper/pull/36) Record that `Args: Record<string, never>` also fails on a direct invocation ([@johanrd](https://github.com/johanrd))\n  * [#31](https://github.com/NullVoxPopuli/ember-content-mapper/pull/31) Record the empty-body close tag as a diagnostic Glint drops ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* `ember-content-mapper`\n  * [#30](https://github.com/NullVoxPopuli/ember-content-mapper/pull/30) Refine readme to optionally keep the tsconfig types entries while ember-tsc coexists ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n"
+  "description": "## Release (2026-10-19)\n\n* ember-content-mapper 0.3.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-content-mapper`\n  * [#42](https://github.com/NullVoxPopuli/ember-content-mapper/pull/42) Make @glint/ember-tsc a peer dependency ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* `ember-content-mapper`\n  * [#40](https://github.com/NullVoxPopuli/ember-content-mapper/pull/40) docs: split migration guides out of the README ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#38](https://github.com/NullVoxPopuli/ember-content-mapper/pull/38) docs: VS Code setup with marketplace extensions and js/ts.* settings ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
