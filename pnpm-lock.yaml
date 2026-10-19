@@ -11,9 +11,6 @@ importers:
 
   .:
     dependencies:
-      '@glint/ember-tsc':
-        specifier: ~1.11.0
-        version: 1.11.0(ember-source@7.2.0(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)
       tinypool:
         specifier: 2.1.2
         version: 2.1.2
@@ -24,6 +21,9 @@ importers:
       '@glimmer/component':
         specifier: ^2.1.1
         version: 2.1.1(supports-color@10.2.2)
+      '@glint/ember-tsc':
+        specifier: ~1.11.0
+        version: 1.11.0(ember-source@7.2.0(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)
       '@glint/template':
         specifier: ^1.8.0
         version: 1.8.0
