@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-10-21)
+
+* ember-content-mapper 0.4.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-content-mapper`
+  * [#44](https://github.com/NullVoxPopuli/ember-content-mapper/pull/44) Widen the @glint/ember-tsc peer range to ^1.11.0 ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+
 ## Release (2026-10-19)
 
 * ember-content-mapper 0.3.2 (patch)
