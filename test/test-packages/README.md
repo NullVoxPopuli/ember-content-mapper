@@ -65,14 +65,9 @@ upstream fix lands, the test fails until the file is updated.
 verification mapping covers. Glint's transform documents this in `template-to-typescript.ts`
 (see its `wideVerification` comments). The mapper maps every synthesized region back to the
 template construct that produced it, so it reports what `ember-tsc` hides. TypeScript 5.9 on the
-transformed text reports the same three errors, so the checker version is not the cause. Each is
+transformed text reports the same two errors, so the checker version is not the cause. Each is
 a limitation of `@glint/template`'s types:
 
-- `record-string-never-args.gts`: `Args: Record<string, never>` has an index signature, so
-  `ComponentSignatureArgs` in `@glint/template/-private/signature.d.ts` takes the
-  `{ Named; Positional }` branch and both resolve to `never`. Both a direct `<Direct />` and a
-  block-param `<tab.component />` invocation report it.
-  Workaround: omit `Args`, or use `Args: { Named: Record<string, never>; Positional: [] }`.
 - `conditional-element-generic.gts`: an `Element` type that is a conditional over an
   unresolved type parameter does not resolve, so no attribute is assignable. Workaround: widen
   the value to a concrete type.

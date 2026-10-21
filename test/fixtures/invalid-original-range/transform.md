@@ -111,6 +111,7 @@ __glintRef__; __glintDSL__;
 - atom [594, 595) -> [162, 162) features=0 ")" <- ""
 - atom [595, 596) -> [155, 155) features=0 ")" <- ""
 - atom [596, 608) -> [155, 155) features=0 ");\n{\nconst [" <- ""
+- verbatim [608, 615) -> [206, 213) features=727039 "groupId"
 - atom [615, 654) -> [155, 155) features=0 "] = __glintY__.blockParams[\"default\"];\n" <- ""
 - atom [654, 700) -> [220, 220) features=0 "{\n__glintDSL__.noop(__glintDSL__.elementTypes." <- ""
 - verbatim [700, 703) -> [221, 224) features=529411 "div"
