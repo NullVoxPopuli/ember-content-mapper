@@ -78,6 +78,18 @@ a limitation of `@glint/template`'s types:
   curried `Invokable`, and `ContentValue` accepts only `ComponentReturn<{}, any>`. Ember renders
   it. Workaround: invoke the curried value, for example `{{#let (component Comp a="hi") as |C|}}<C />{{/let}}`.
 
+### `Args: Record<string, never>`
+
+`record-string-never-args.gts` invokes a `ComponentLike` and a `TOC`
+whose signature is `Args: Record<string, never>`,
+directly and through a block param.
+`@glint/template` 1.9.0 treats an args map with an index signature as named args
+([typed-ember/glint#1234](https://github.com/typed-ember/glint/pull/1234)),
+so the file has no errors.
+Older versions report
+`TS2345: Argument of type '[]' is not assignable to parameter of type 'never'`
+on each invocation.
+
 ### JSDoc `@extends` over an expression heritage
 
 `jsdoc-extends-expression-heritage.gts` imports `classic-mixin.gjs`, a classic component with
