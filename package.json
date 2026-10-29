@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@glimmer/component": "^2.1.1",
-    "@glint/ember-tsc": "1.13.1",
+    "@glint/ember-tsc": "1.14.2",
     "@glint/template": "^1.8.0",
     "@glint/type-test": "^2.0.1",
     "@tsconfig/ember": "^3.0.10",
