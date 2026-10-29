@@ -104,8 +104,11 @@ upstream report.
   classic `class Foo extends Component.extend(SomeMixin) {}` with a
   `/** @extends {Component<FooSignature>} */` tag keeps its signature. TypeScript 7 rejects the tag
   with `TS8023`/`TS8026`, or with `TS2508` since `7.1.0-dev.20261015.1`. The signature is lost,
-  so every invocation types the component as taking no arguments, blocks, or element. Workaround:
-  a sibling declaration file (see [Declaration files](./README.md#declaration-files)).
+  so every invocation types the component as taking no arguments, blocks, or element. Fix:
+  ember-source 7.5.0-beta.1 or newer
+  ([emberjs/ember.js#21727](https://github.com/emberjs/ember.js/pull/21727)). On older
+  ember-source, use a sibling declaration file (see
+  [Declaration files](./README.md#declaration-files)).
 - Closure-style `function(...)` JSDoc types no longer parse, and the parse error silently drops
   every later `@property` in the same typedef. Arguments vanish from the signature with no error at
   the definition. Rewrite them as arrow types: `{function(string)=}` becomes

@@ -1,13 +1,4 @@
-diagnostics-tests/upstream-differences/src/classic-mixin.gjs(11,43): error TS2508: No base constructor has the specified number of type arguments.
-diagnostics-tests/upstream-differences/src/classic-mixin.gjs(14,3): error TS2345: Argument of type 'typeof ClassicMixin' is not assignable to parameter of type 'abstract new (owner?: Owner | undefined) => HasContext<AnyContext>'.
-  Property '[Context]' is missing in type 'ClassicMixin' but required in type 'HasContext<AnyContext>'.
 diagnostics-tests/upstream-differences/src/conditional-element-generic.gts(21,20): error TS2345: Argument of type '{ id: "x"; }' is not assignable to parameter of type 'Partial<((IsFake extends true ? HTMLDivElement : HTMLButtonElement) extends null ? unknown : IsFake extends true ? HTMLDivElement : HTMLButtonElement) extends HTMLElement ? ... : ...>'.
 diagnostics-tests/upstream-differences/src/curried-component-content.gts(5,28): error TS2345: Argument of type 'Invokable<(named?: PrebindArgs<{ a: string; b?: string | undefined; }, "a"> | undefined) => ComponentReturn<FlattenBlockParams<{}>, unknown>>' is not assignable to parameter of type 'ContentValue'.
 diagnostics-tests/upstream-differences/src/empty-body-close-tag.gts(7,43): error TS7053: Element implicitly has an 'any' type because expression of type '"default"' can't be used to index type 'Required<FlattenBlockParams<{}>>'.
   Property 'default' does not exist on type 'Required<FlattenBlockParams<{}>>'.
-diagnostics-tests/upstream-differences/src/jsdoc-extends-expression-heritage.gts(3,29): error TS2769: No overload matches this call.
-  The last overload gave the following error.
-    Argument of type 'typeof ClassicMixin' is not assignable to parameter of type '(...params: any) => any'.
-      Type 'typeof ClassicMixin' provides no match for the signature '(...params: any): any'.
-diagnostics-tests/upstream-differences/src/record-string-never-args.gts(8,57): error TS2345: Argument of type '[]' is not assignable to parameter of type 'never'.
-diagnostics-tests/upstream-differences/src/record-string-never-args.gts(12,35): error TS2345: Argument of type '[]' is not assignable to parameter of type 'never'.

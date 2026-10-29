@@ -14,7 +14,7 @@
     "@tsconfig/ember": "^3.0.9",
     "ember-content-mapper": "workspace:*",
     "ember-source": "^6.2.0",
-    "typescript": "7.1.0-dev.20261015.1"
+    "typescript": "7.1.0-dev.20261029.1"
   },
   "volta": {
     "extends": "../../../package.json"

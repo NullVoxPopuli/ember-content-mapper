@@ -85,10 +85,11 @@ a limitation of `@glint/template`'s types:
 tag. Since `7.1.0-dev.20261015.1`
 ([TypeScript#64072](https://github.com/microsoft/TypeScript/pull/64072)), TypeScript 7 applies
 the tag's type arguments to the call's return type. `Component.extend(Evented)` returns a
-constructor that is not generic, so `classic-mixin.gjs` reports `TS2508: No base constructor has
-the specified number of type arguments`. The component still has no signature, and its
-invocation reports `TS2769`. This reproduces in plain JavaScript with no Glint involved, so it
-is a typescript-go difference.
+constructor that is not generic in ember-source 7.4 and older. There, `classic-mixin.gjs` reports
+`TS2508: No base constructor has the specified number of type arguments`, and the invocation
+reports `TS2769`. ember-source 7.5.0-beta.1 keeps the constructor generic
+([emberjs/ember.js#21727](https://github.com/emberjs/ember.js/pull/21727)). This project uses it,
+so both files have no errors.
 
 ### Consecutive directives
 

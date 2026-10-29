@@ -64,15 +64,19 @@ test('go to definition from a template into the component file', async () => {
   assert.ok(definitionUris(result).some((uri) => uri.endsWith('/app/components/counter.gts')));
 });
 
-test('go to definition from a .ts import into a .gts module', async () => {
-  const { uri, text } = client.open(file('app/components/index.ts'));
-  const result = await client.connection.sendRequest(DefinitionRequest.type, {
-    textDocument: { uri },
-    position: positionOf(text, './counter.gts', 3),
-  });
+test(
+  'go to definition from a .ts import into a .gts module',
+  { todo: 'https://github.com/microsoft/TypeScript/issues/64828' },
+  async () => {
+    const { uri, text } = client.open(file('app/components/index.ts'));
+    const result = await client.connection.sendRequest(DefinitionRequest.type, {
+      textDocument: { uri },
+      position: positionOf(text, './counter.gts', 3),
+    });
 
-  assert.ok(definitionUris(result).some((uri) => uri.endsWith('/app/components/counter.gts')));
-});
+    assert.ok(definitionUris(result).some((uri) => uri.endsWith('/app/components/counter.gts')));
+  },
+);
 
 test('completions inside a template list the component members', async () => {
   const { uri, text } = client.open(file('app/components/counter.gts'));
