@@ -1,16 +1,17 @@
 allowBuilds:
   esbuild: false
 minimumReleaseAgeExclude:
-  - '@typescript/typescript-darwin-arm64@7.1.0-dev.20260821.1'
-  - '@typescript/typescript-darwin-x64@7.1.0-dev.20260821.1'
-  - '@typescript/typescript-linux-arm64@7.1.0-dev.20260821.1'
-  - '@typescript/typescript-linux-arm@7.1.0-dev.20260821.1'
-  - '@typescript/typescript-linux-x64@7.1.0-dev.20260821.1'
-  - '@typescript/typescript-win32-arm64@7.1.0-dev.20260821.1'
-  - '@typescript/typescript-win32-x64@7.1.0-dev.20260821.1'
-  - typescript@7.1.0-dev.20260821.1
+  - '@typescript/typescript-darwin-arm64@7.1.0-dev.20261029.1'
+  - '@typescript/typescript-darwin-x64@7.1.0-dev.20261029.1'
+  - '@typescript/typescript-linux-arm64@7.1.0-dev.20261029.1'
+  - '@typescript/typescript-linux-arm@7.1.0-dev.20261029.1'
+  - '@typescript/typescript-linux-x64@7.1.0-dev.20261029.1'
+  - '@typescript/typescript-win32-arm64@7.1.0-dev.20261029.1'
+  - '@typescript/typescript-win32-x64@7.1.0-dev.20261029.1'
+  - typescript@7.1.0-dev.20261029.1
   - '@glint/ember-tsc@1.11.0 || 1.14.3'
   - ember-estree@0.8.0
+  - ember-source@7.5.0-beta.1
   - '@glint/template@1.11.1'
 packages:
   - '.'
