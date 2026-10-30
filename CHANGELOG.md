@@ -1,5 +1,22 @@
 # Changelog
 
+## Release (2026-10-30)
+
+* ember-content-mapper 0.4.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-content-mapper`
+  * [#47](https://github.com/NullVoxPopuli/ember-content-mapper/pull/47) Cover attributes on a component with a conditional Element over a generic (#14) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `ember-content-mapper`
+  * [#49](https://github.com/NullVoxPopuli/ember-content-mapper/pull/49) Move to @nullvoxpopuli/release-plan ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#46](https://github.com/NullVoxPopuli/ember-content-mapper/pull/46) Add coverage for `Args: Record<string, never>` invocations (#13) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-10-21)
 
 * ember-content-mapper 0.4.0 (minor)
