@@ -68,15 +68,32 @@ template construct that produced it, so it reports what `ember-tsc` hides. TypeS
 transformed text reports the same two errors, so the checker version is not the cause. Each is
 a limitation of `@glint/template`'s types:
 
-- `conditional-element-generic.gts`: an `Element` type that is a conditional over an
-  unresolved type parameter does not resolve, so no attribute is assignable. Workaround: widen
-  the value to a concrete type.
 - `empty-body-close-tag.gts`: `<NoBlocks></NoBlocks>` with nothing between the tags transforms
   to a default block, `const [] = __glintY__.blockParams["default"]`, and the signature declares
   no `Blocks`. `<NoBlocks />` transforms to no block. Workaround: self-close the element.
 - `curried-component-content.gts`: `{{component Comp a="hi"}}` in content position produces a
   curried `Invokable`, and `ContentValue` accepts only `ComponentReturn<{}, any>`. Ember renders
   it. Workaround: invoke the curried value, for example `{{#let (component Comp a="hi") as |C|}}<C />{{/let}}`.
+
+### `Args: Record<string, never>`
+
+`record-string-never-args.gts` invokes a `ComponentLike` and a `TOC`
+whose signature is `Args: Record<string, never>`,
+directly and through a block param.
+`@glint/template` 1.9.0 treats an args map with an index signature as named args
+([typed-ember/glint#1234](https://github.com/typed-ember/glint/pull/1234)),
+so the file has no errors.
+Older versions report
+`TS2345: Argument of type '[]' is not assignable to parameter of type 'never'`
+on each invocation.
+
+### Attributes on a generic `Element`
+
+`conditional-element-generic.gts` passes attributes to a component
+whose `Element` depends on a type parameter.
+Before `@glint/template` 1.11.1
+([typed-ember/glint#1273](https://github.com/typed-ember/glint/pull/1273)),
+each attribute reported `TS2345`.
 
 ### JSDoc `@extends` over an expression heritage
 

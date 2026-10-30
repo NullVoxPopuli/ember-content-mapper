@@ -1,18 +1,22 @@
 {
   "solution": {
     "ember-content-mapper": {
-      "impact": "minor",
-      "oldVersion": "0.3.2",
-      "newVersion": "0.4.0",
+      "impact": "patch",
+      "oldVersion": "0.4.0",
+      "newVersion": "0.4.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-10-21)\n\n* ember-content-mapper 0.4.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-content-mapper`\n  * [#44](https://github.com/NullVoxPopuli/ember-content-mapper/pull/44) Widen the @glint/ember-tsc peer range to ^1.11.0 ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n"
+  "description": "## Release (2026-10-30)\n\n* ember-content-mapper 0.4.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-content-mapper`\n  * [#47](https://github.com/NullVoxPopuli/ember-content-mapper/pull/47) Cover attributes on a component with a conditional Element over a generic (#14) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `ember-content-mapper`\n  * [#49](https://github.com/NullVoxPopuli/ember-content-mapper/pull/49) Move to @nullvoxpopuli/release-plan ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#46](https://github.com/NullVoxPopuli/ember-content-mapper/pull/46) Add coverage for `Args: Record<string, never>` invocations (#13) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
