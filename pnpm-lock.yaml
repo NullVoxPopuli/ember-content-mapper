@@ -23,7 +23,7 @@ importers:
         version: 2.1.1(supports-color@10.2.2)
       '@glint/ember-tsc':
         specifier: 1.14.3
-        version: 1.14.3(ember-source@7.5.0-beta.1(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)
+        version: 1.14.3(ember-source@7.5.0-beta.2(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)
       '@glint/template':
         specifier: ^1.11.1
         version: 1.11.1
@@ -46,8 +46,8 @@ importers:
         specifier: link:.
         version: 'link:'
       ember-source:
-        specifier: 7.5.0-beta.1
-        version: 7.5.0-beta.1(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2)
+        specifier: 7.5.0-beta.2
+        version: 7.5.0-beta.2(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2)
       expect-type:
         specifier: ^1.2.1
         version: 1.4.0
@@ -3863,8 +3863,8 @@ packages:
     peerDependencies:
       '@glimmer/component': '>= 1.1.2'
 
-  ember-source@7.5.0-beta.1:
-    resolution: {integrity: sha512-GGO01L+NYJUGpODCx71yVzLyoIiDcwMk3Cj+yIkknZG0/JV4KhflKGrmI2S5VXZJb5qGSEYnQ/TFix0NuwOPaA==}
+  ember-source@7.5.0-beta.2:
+    resolution: {integrity: sha512-Y9V6ZDHPOEOrJAXJ/z7NjcXudv3M9S1h+VzFc4rn/sKpUyaZFWDT0fgbaNt1EDCNFA07kTgngeSz+8NQ5iqWKA==}
     engines: {node: '>= 20.19'}
     peerDependencies:
       '@glimmer/component': '>= 1.1.2'
@@ -7871,7 +7871,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/ember-tsc@1.14.3(ember-source@7.5.0-beta.1(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)':
+  '@glint/ember-tsc@1.14.3(ember-source@7.5.0-beta.2(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)':
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@glint/template': 1.11.1
@@ -7892,7 +7892,7 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
     optionalDependencies:
-      ember-source: 7.5.0-beta.1(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2)
+      ember-source: 7.5.0-beta.2(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -10256,7 +10256,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-source@7.5.0-beta.1(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2):
+  ember-source@7.5.0-beta.2(@glimmer/component@2.1.1(supports-color@10.2.2))(supports-color@10.2.2):
     dependencies:
       '@babel/core': 7.29.7(supports-color@10.2.2)
       '@embroider/addon-shim': 1.10.3(supports-color@10.2.2)

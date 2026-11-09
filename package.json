@@ -39,7 +39,7 @@
     "@types/node": "^24.0.0",
     "@volar/language-core": "~2.4.28",
     "ember-content-mapper": "link:.",
-    "ember-source": "7.5.0-beta.1",
+    "ember-source": "7.5.0-beta.2",
     "expect-type": "^1.2.1",
     "mitata": "^1.0.34",
     "oxfmt": "^0.65.0",
