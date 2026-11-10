@@ -40,6 +40,27 @@ test('declaration emit for a .gts component', () => {
   );
 });
 
+test('declaration emit with outputExtensions', () => {
+  const project = 'diagnostics-tests/declaration-output-extensions';
+  rmSync(`${testDirectory}${project}/dist`, { recursive: true, force: true });
+
+  const { stdout } = run(['-p', project, '--runExternalCode']);
+  assert.equal(stdout, '');
+
+  assert.ok(
+    !existsSync(`${testDirectory}${project}/dist/Greeting.d.gts.ts`),
+    'Greeting.gts does not emit Greeting.d.gts.ts',
+  );
+  assert.equal(
+    readFileSync(`${testDirectory}${project}/dist/Greeting.d.ts`, 'utf8'),
+    readFileSync(`${testDirectory}${project}/expected/Greeting.d.ts`, 'utf8'),
+  );
+  assert.equal(
+    readFileSync(`${testDirectory}${project}/dist/index.d.ts`, 'utf8'),
+    readFileSync(`${testDirectory}${project}/expected/index.d.ts`, 'utf8'),
+  );
+});
+
 test('a second --build run transforms nothing', () => {
   const project = 'diagnostics-tests/incremental';
   rmSync(`${testDirectory}${project}/dist`, { recursive: true, force: true });

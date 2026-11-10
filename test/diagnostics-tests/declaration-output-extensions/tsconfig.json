@@ -1,0 +1,20 @@
+{
+  "extends": "@tsconfig/ember/tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "rewriteRelativeImportExtensions": true
+  },
+  "contentMappers": [
+    {
+      "package": "ember-content-mapper",
+      "extensions": [".gts", ".gjs"],
+      "outputExtensions": { ".gts": ".js", ".gjs": ".js" }
+    }
+  ],
+  "include": ["src"]
+}

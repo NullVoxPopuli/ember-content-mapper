@@ -73,6 +73,36 @@ typed from `counter.d.gjs.ts` (TypeScript 7's arbitrary-extension convention) or
 (Glint's) when one exists. The declaration is parsed as a `.ts` module, so anything unbodied or
 uninitialized in it must use ambient (`declare`) syntax.
 
+### Publishing a library
+
+By default, TypeScript emits `counter.d.gts.ts` for `counter.gts`, and keeps `./counter.gts` in the
+import specifiers of other declarations. A library that compiles `.gts` and `.gjs` to `.js` (for
+example, with rollup) can emit `counter.d.ts` next to its `counter.js` instead:
+
+```jsonc
+{
+  "compilerOptions": {
+    "rewriteRelativeImportExtensions": true,
+  },
+  "contentMappers": [
+    {
+      "package": "ember-content-mapper",
+      "extensions": [".gts", ".gjs"],
+      "outputExtensions": { ".gts": ".js", ".gjs": ".js" },
+    },
+  ],
+}
+```
+
+TypeScript requires `rewriteRelativeImportExtensions` with `outputExtensions`, and rewrites
+`./counter.gts` to `./counter.js` in the emitted declarations. The declarations then match the
+compiled output, so `package.json#exports` needs only one `types` pattern. This needs TypeScript
+`7.1.0-dev.20261014.1` or newer.
+
+Apps do not emit, so they do not need this. It is not the default because
+`rewriteRelativeImportExtensions` reports `TS2877` for extension imports that are not relative,
+such as `#app/components/counter.gts`.
+
 ## Migrating
 
 - [From TypeScript 6 and Glint 2 (`ember-tsc`)](./MIGRATING_FROM_TS6.md)

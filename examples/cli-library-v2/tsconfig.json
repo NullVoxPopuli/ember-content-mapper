@@ -22,12 +22,14 @@
       This way, we can have simpler `package.json#exports` that matches
       imports to files on disk
     */
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "rewriteRelativeImportExtensions": true
   },
   "contentMappers": [
     {
       "package": "ember-content-mapper",
-      "extensions": [".gts", ".gjs"]
+      "extensions": [".gts", ".gjs"],
+      "outputExtensions": { ".gts": ".js", ".gjs": ".js" }
     }
   ]
 }

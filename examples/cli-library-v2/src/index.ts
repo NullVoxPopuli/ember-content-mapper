@@ -3,9 +3,9 @@
 //
 // All relative specifiers keep their extension: rollup resolves the literal
 // path, and .gts/.gjs modules additionally require it (TypeScript resolves a
-// content-mapped file only when the specifier has the extension). The
-// specifiers land as-is in the emitted declarations, where consumers resolve
-// them again: counter.gts -> counter.d.gts.ts, format.ts -> format.d.ts.
+// content-mapped file only when the specifier has the extension). In the
+// emitted declarations, rewriteRelativeImportExtensions turns './counter.gts'
+// into './counter.js', which resolves to counter.d.ts.
 export { default as Avatar } from './components/avatar.gjs';
 export { default as Counter } from './components/counter.gts';
 export type { CounterSignature } from './components/counter.gts';
